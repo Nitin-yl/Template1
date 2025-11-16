@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+body {
+  @apply bg-[#050509] text-gray-100 antialiased;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", sans-serif;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scrollbar-width: none;
+}
