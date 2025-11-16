@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, MessageCircle, Phone, Sparkles } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 function GlowCard({ children, delay }) {
   return (
@@ -79,17 +80,23 @@ export default function FAQSection() {
                 />
               </button>
 
-              <AnimatePresence>
+              <AnimatePresence mode="sync">
                 {open === index && (
-                  <motion.p
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="text-[11px] text-gray-400 pt-2 pb-3"
+                  <motion.div
+                    key="content"
+                    initial={{ opacity: 0, y: -6, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: "auto" }}
+                    exit={{ opacity: 0, y: -6, height: 0 }}
+                    transition={{
+                      duration: 0.35,
+                      ease: [0.25, 0.1, 0.25, 1],
+                    }}
+                    className="overflow-hidden"
                   >
-                    {item.a}
-                  </motion.p>
+                    <p className="text-[11px] text-gray-400 pt-2 pb-3">
+                      {item.a}
+                    </p>
+                  </motion.div>
                 )}
               </AnimatePresence>
             </div>
@@ -127,29 +134,33 @@ export default function FAQSection() {
           </div>
 
           <div className="space-y-2 text-[11px] mt-6">
-            <motion.button
-              whileHover={{
-                scale: 1.06,
-                boxShadow: "0 0 18px rgba(255,255,255,0.3)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full rounded-full px-4 py-2 bg-white text-black font-medium flex items-center justify-center gap-2"
-            >
-              Book a Call
-              <Phone className="w-4 h-4" />
-            </motion.button>
+            <NavLink to="*">
+              <motion.button
+                whileHover={{
+                  scale: 1.06,
+                  boxShadow: "0 0 18px rgba(255,255,255,0.3)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full rounded-full px-4 py-2 bg-white text-black font-medium flex items-center justify-center gap-2"
+              >
+                Book a Call
+                <Phone className="w-4 h-4" />
+              </motion.button>
+            </NavLink>
 
-            <motion.button
-              whileHover={{
-                scale: 1.04,
-                backgroundColor: "rgba(255,255,255,0.12)",
-              }}
-              whileTap={{ scale: 0.96 }}
-              className="w-full rounded-full px-4 py-2 border border-white/15 bg-white/5 text-gray-100 flex items-center justify-center gap-2"
-            >
-              Join Discord
-              <Sparkles className="w-4 h-4" />
-            </motion.button>
+            <NavLink to="*">
+              <motion.button
+                whileHover={{
+                  scale: 1.04,
+                  backgroundColor: "rgba(255,255,255,0.12)",
+                }}
+                whileTap={{ scale: 0.96 }}
+                className="w-full rounded-full px-4 py-2 border border-white/15 bg-white/5 text-gray-100 flex items-center justify-center gap-2"
+              >
+                Join Discord
+                <Sparkles className="w-4 h-4" />
+              </motion.button>
+            </NavLink>
           </div>
         </div>
       </GlowCard>

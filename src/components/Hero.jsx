@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Zap, LineChart } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -92,28 +93,32 @@ export default function Hero() {
           viewport={{ once: false, amount: 0.3 }}
           className="flex flex-wrap items-center justify-center gap-3 pt-2"
         >
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 40px rgba(99,102,241,0.6)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full text-xs px-6 py-2 bg-white text-black font-medium shadow-lg shadow-indigo-500/20 transition"
-          >
-            Start Free Trial
-          </motion.button>
+          <NavLink to="*">
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 40px rgba(99,102,241,0.6)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-full text-xs px-6 py-2 bg-white text-black font-medium shadow-lg shadow-indigo-500/20 transition"
+            >
+              Start Free Trial
+            </motion.button>
+          </NavLink>
 
-          <motion.button
-            whileHover={{
-              scale: 1.05,
-              backgroundColor: "rgba(255,255,255,0.15)",
-              boxShadow: "0 0 35px rgba(255,255,255,0.08)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="rounded-full text-xs px-5 py-2 border border-white/15 bg-white/5 text-white transition backdrop-blur-md"
-          >
-            Schedule a Demo
-          </motion.button>
+          <NavLink to="*">
+            <motion.button
+              whileHover={{
+                scale: 1.05,
+                backgroundColor: "rgba(255,255,255,0.15)",
+                boxShadow: "0 0 35px rgba(255,255,255,0.08)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="rounded-full text-xs px-5 py-2 border border-white/15 bg-white/5 text-white transition backdrop-blur-md"
+            >
+              Schedule a Demo
+            </motion.button>
+          </NavLink>
         </motion.div>
       </div>
     </section>

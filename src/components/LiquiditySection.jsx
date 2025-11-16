@@ -1,6 +1,6 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Waves, Droplet, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 const Particles = ({ count = 10 }) =>
   [...Array(count)].map((_, i) => (
@@ -23,45 +23,14 @@ const Particles = ({ count = 10 }) =>
     />
   ));
 
-function TiltCard({ children, delay }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useTransform(
-    y,
-    isHovered ? [-60, 60] : [0, 0],
-    isHovered ? [10, -10] : [0, 0]
-  );
-  const rotateY = useTransform(
-    x,
-    isHovered ? [-60, 60] : [0, 0],
-    isHovered ? [-10, 10] : [0, 0]
-  );
-
-  const handleMove = (e) => {
-    if (!isHovered) return;
-    const r = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - (r.left + r.width / 2));
-    y.set(e.clientY - (r.top + r.height / 2));
-  };
-
+function GlowCard({ children, delay }) {
   return (
     <motion.div
       className="
         relative rounded-2xl border border-white/10 
         bg-white/3 backdrop-blur-xl
-        p-5 overflow-hidden cursor-pointer 
-        h-full flex flex-col
+        p-5 overflow-hidden cursor-pointer h-full flex flex-col
       "
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => {
-        setIsHovered(false);
-        x.set(0);
-        y.set(0);
-      }}
-      onMouseMove={handleMove}
-      style={{ rotateX, rotateY }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, amount: 0.3 }}
@@ -89,6 +58,7 @@ function TiltCard({ children, delay }) {
 
       <Particles count={10} />
 
+      {/* Actual content */}
       <div className="relative z-10 flex flex-col h-full">{children}</div>
     </motion.div>
   );
@@ -107,7 +77,7 @@ export default function LiquiditySection() {
       id="liquidity"
       className="mt-14 grid md:grid-cols-[1.1fr_1fr] gap-6 items-stretch"
     >
-      <TiltCard delay={0}>
+      <GlowCard delay={0}>
         <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
           <Waves className="w-4 h-4 text-indigo-400" />
           Pools Overview
@@ -147,9 +117,9 @@ export default function LiquiditySection() {
             </tbody>
           </table>
         </div>
-      </TiltCard>
+      </GlowCard>
 
-      <TiltCard delay={0.2}>
+      <GlowCard delay={0.2}>
         <div className="flex flex-col h-full justify-between">
           <div>
             <h3 className="text-base font-semibold flex items-center gap-2">
@@ -163,7 +133,6 @@ export default function LiquiditySection() {
               from one unified interface.
             </p>
 
-            {/* ⚡ Added to fix height & balance UI */}
             <ul className="mt-4 space-y-2 text-[11px] text-gray-300">
               <li className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
@@ -180,22 +149,24 @@ export default function LiquiditySection() {
             </ul>
           </div>
 
-          <motion.button
-            whileHover={{
-              scale: 1.06,
-              boxShadow: "0 0 20px rgba(255,255,255,0.35)",
-            }}
-            whileTap={{ scale: 0.95 }}
-            className="
-              mt-6 rounded-full text-xs px-6 py-2 
-              bg-white text-black font-medium flex items-center gap-2
-            "
-          >
-            Provide Liquidity
-            <Sparkles className="w-4 h-4" />
-          </motion.button>
+          <NavLink to="*">
+            <motion.button
+              whileHover={{
+                scale: 1.06,
+                boxShadow: "0 0 20px rgba(255,255,255,0.35)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              className="
+                mt-6 rounded-full text-xs px-6 py-2 
+                bg-white text-black font-medium flex items-center gap-2
+              "
+            >
+              Provide Liquidity
+              <Sparkles className="w-4 h-4" />
+            </motion.button>
+          </NavLink>
         </div>
-      </TiltCard>
+      </GlowCard>
     </section>
   );
 }

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { BarChart3, Coins } from "lucide-react";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function useCounter(target, duration = 1500) {
   const [value, setValue] = useState(0);
@@ -140,7 +141,8 @@ export default function DashboardSection() {
             </p>
           </div>
 
-          <motion.button
+          <NavLink to='*' >
+            <motion.button
             whileHover={{
               scale: 1.07,
               backgroundColor: "rgba(255,255,255,0.95)",
@@ -151,6 +153,7 @@ export default function DashboardSection() {
           >
             Explore
           </motion.button>
+          </NavLink>
         </div>
 
         <div className="relative mt-3 h-56 rounded-xl overflow-hidden border border-white/10 bg-black/50 p-3">

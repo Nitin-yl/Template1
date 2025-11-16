@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { FiLayers, FiCode } from "react-icons/fi";
 import { HiOutlineSparkles } from "react-icons/hi2";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -65,7 +66,7 @@ export default function Navbar() {
           {["features", "dashboard", "liquidity", "faq"].map((item, index) => (
             <a
               key={index}
-              href={`#${item}`}
+              href='*'
               className="capitalize hover:text-white transition"
             >
               {item}
@@ -73,9 +74,11 @@ export default function Navbar() {
           ))}
         </div>
 
-        <button className="hidden md:block text-xs px-5 py-1.5 rounded-full bg-white/20 border border-white/20 backdrop-blur-xl hover:bg-white/30 transition">
+        <NavLink to="*" >
+          <button className="hidden md:block text-xs px-5 py-1.5 rounded-full bg-white/20 border border-white/20 backdrop-blur-xl hover:bg-white/30 transition">
           Get Started
         </button>
+        </NavLink>
 
         <motion.div
           className="md:hidden"
